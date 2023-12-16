@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: LoadingScreen(),
+      home: const LoadingScreen(ctyName: 'Dhaka',),
     );
   }
 }

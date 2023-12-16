@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather_today_completed/utils/constants.dart';
 
+import 'loading_screen.dart';
+
 class CityScreen extends StatefulWidget {
   @override
   _CityScreenState createState() => _CityScreenState();
@@ -61,7 +63,12 @@ class _CityScreenState extends State<CityScreen> {
                   shape: StadiumBorder(),
                 ),
                 onPressed: () {
-                  Navigator.pop(context, cityName);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoadingScreen(ctyName: cityName,)),
+                  );
+                 // Navigator.pop(context, cityName);
                 },
                 child: Text(
                   'Search Weather',

@@ -4,7 +4,10 @@ import '../utils/custom_paint.dart';
 import 'city_screen.dart';
 
 class LocationScreen extends StatefulWidget {
-  LocationScreen({this.locationWeather});
+  LocationScreen({
+    super.key,
+    this.locationWeather,
+  });
 
   final locationWeather;
 
@@ -17,9 +20,8 @@ class LocationScreenState extends State<LocationScreen> {
   int minTemperature = 0;
   int maxTemperature = 0;
   double windSpeed = 0.0;
-  int humidity = 50;
-
-  String cityName = "Chandpur";
+  int humidity = 0;
+  String cityName = '';
 
   @override
   void initState() {
@@ -30,8 +32,18 @@ class LocationScreenState extends State<LocationScreen> {
 
   void updateUI(dynamic weatherData) {
     setState(() {
-      double temp = weatherData['main']['temp'];
-      temperature = temp.toInt();
+      if (weatherData != 'null') {
+        double temp = weatherData['main']['temp'];
+
+        temperature = temp.toInt();
+        cityName = weatherData['name'];
+        humidity = weatherData['main']['humidity'];
+        minTemperature = weatherData['main']['temp_min'].toInt();
+        maxTemperature = weatherData['main']['temp_max'].toInt();
+        windSpeed = double.parse(weatherData['wind']['speed'].toString());
+      } else {
+        cityName = "City not found!";
+      }
     });
   }
 

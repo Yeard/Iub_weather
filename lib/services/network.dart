@@ -14,6 +14,7 @@ class NetworkHelper {
 
       return jsonDecode(data);
     } else {
+      return 'null';
       print(response.statusCode);
     }
   }

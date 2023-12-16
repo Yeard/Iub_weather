@@ -4,6 +4,12 @@ import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingScreen extends StatefulWidget {
+
+  final String ctyName;
+
+  const LoadingScreen({super.key, required this.ctyName});
+
+
   @override
   State<StatefulWidget> createState() {
     return _LoadingScreenState();
@@ -18,7 +24,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getLocationData() async {
-    var weatherData = await getCityWeather("Dhaka");
+    var weatherData = await getCityWeather(widget.ctyName);
+
+    print(weatherData);
 
     Navigator.push(
       context,
@@ -34,8 +42,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   //method to get Dhaka weather
   Future<dynamic> getCityWeather(String cityName) async {
-    const String weatherUrl =
-        "https://api.openweathermap.org/data/2.5/weather?q=dhaka&appid=5a18fc6e52dc7342ee016a20e95a106c&units=metric";
+     String weatherUrl =
+        "https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=5a18fc6e52dc7342ee016a20e95a106c&units=metric";
     NetworkHelper networkHelper = NetworkHelper('$weatherUrl');
 
     var weatherData = await networkHelper.getData();
